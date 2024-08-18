@@ -1,5 +1,3 @@
-//import logo from './logo.svg';
-//import './App.css';
 import { NavermapsProvider } from "react-naver-maps";
 import axios from 'axios';
 import Map from './components/Map';
