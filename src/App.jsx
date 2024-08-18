@@ -26,31 +26,10 @@ function App() {
     fetchMarkers();
   }, []);
 
-  /* useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          setMyLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          });
-        },
-        () => {
-          console.log("사용자 위치 불러오기 실패");
-          setMyLocation({latitude: 37.5358994, longitude: 126.8969627})
-        }
-      );
-    }
-  }, []); */
-
   const toggleType = (type) => {
-      sethiddenType(prevHiddenType => {
-        if (prevHiddenType.includes(type)) {
-          return prevHiddenType.filter(t => t !== type); // 이미 숨겨져 있다면 다시 표시
-        } else {
-          return [...prevHiddenType, type]; // 숨겨진 타입에 추가
-        }
-      })
+    sethiddenType(prevHiddenType =>
+      prevHiddenType.includes(type) ? prevHiddenType.filter(t => t !== type)/* 이미 숨겨져 있다면 다시 표시 */ : [...prevHiddenType, type] /* 숨겨진 타입에 추가 */
+    )
   }
 
   return (

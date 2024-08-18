@@ -1,33 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import {NaverMap, Marker, useNavermaps, Container as MapDiv, Circle} from "react-naver-maps";
 import { faCoffee, faHamburger, faLocationDot, faPills, faStore } from '@fortawesome/free-solid-svg-icons';
+import ReactDOMServer from 'react-dom/server';
+import Icon from './Icon';
 
 const Map = ({markers, hiddenType, center}) => {
   const navermaps = useNavermaps();
   const [markerIcon, setMarkerIcon] = useState([]);
 
-  // FontAwesome 아이콘을 SVG로 변환하여 상태에 저장
   useEffect(() => {
     if (navermaps) {
       const icons = {
-        LOCATION: iconSVG(faLocationDot, '#000000', '#00ff0000', '90'),
-        CAFE: iconSVG(faCoffee, '#FFFFFF', '#A37B7B', '30'),
-        FOOD: iconSVG(faHamburger, '#FFFFFF', '#F29979', '30'),
-        MART: iconSVG(faStore, '#FFFFFF', '#F279BC', '30'),
-        PHARMACY: iconSVG(faPills, '#FFFFFF', '#87C0CB', '30')
+        LOCATION: ReactDOMServer.renderToString(<Icon icon={faLocationDot} color="#000000" backgroundColor="#00ff0000" size={90} />),
+        CAFE: ReactDOMServer.renderToString(<Icon icon={faCoffee} color="#FFFFFF" backgroundColor="#A37B7B" size={30} />),
+        FOOD: ReactDOMServer.renderToString(<Icon icon={faHamburger} color="#FFFFFF" backgroundColor="#F29979" size={30} />),
+        MART: ReactDOMServer.renderToString(<Icon icon={faStore} color="#FFFFFF" backgroundColor="#F279BC" size={30} />),
+        PHARMACY: ReactDOMServer.renderToString(<Icon icon={faPills} color="#FFFFFF" backgroundColor="#87C0CB" size={30} />),
       }
       setMarkerIcon(icons);
     }
   }, [navermaps]);
-
-  const iconSVG = (icon, color, backgroundColor, size) => {
-    return `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -100 400 580" width="${size}" height="${size}">
-          <circle cx="200" cy="200" r="280" fill="${backgroundColor}" fill-opacity="0.8" />
-          <path fill="${color}" d="${icon.icon[4]}" transform="translate(12, 12) scale(0.6)" />
-        </svg>
-      `;
-  }
 
   return (
     <MapDiv style={{ width: "100%", height: "700px", borderRadius: "10px", overflow: "hidden"}}>

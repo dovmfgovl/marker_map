@@ -1,10 +1,10 @@
 import React from 'react';
 import Icon from './Icon';
 
-const IconButton = ({ icon, label, onClick, iconColor, backgroundColor }) => {
+const IconButton = ({ /* icon, label, onClick, iconColor, backgroundColor */ type, toggleType, iconData }) => {
   return (
     <button
-      onClick={onClick}
+      onClick={() => toggleType(type)}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -14,12 +14,8 @@ const IconButton = ({ icon, label, onClick, iconColor, backgroundColor }) => {
         cursor: 'pointer'
       }}
     >
-      <Icon 
-        icon={icon}
-        color={iconColor}
-        backgroundColor={backgroundColor}
-      />
-      <span style={{ fontSize: '14px' }}>{label}</span>  
+      <Icon {...iconData} />
+      <span style={{ fontSize: '14px' }}>{iconData.label}</span>  
     </button>
   )
 }
