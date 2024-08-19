@@ -11,7 +11,7 @@ Author: 이슬기
 import React from 'react';
 import Icon from './Icon';
 
-const IconButton = ({ /* icon, label, onClick, iconColor, backgroundColor */ type, toggleType, iconData }) => {
+const IconButton = ({ type, toggleType, iconData }) => {
   return (
     <button
       onClick={() => toggleType(type)}
